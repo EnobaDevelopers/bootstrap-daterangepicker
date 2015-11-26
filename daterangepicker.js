@@ -124,16 +124,15 @@
     DateRangePicker.prototype = {
 
         constructor: DateRangePicker,
-la
+
         setOptions: function(options, callback) {
 
-            this.startDate = moment().startOf('day');
-            this.endDate = moment().endOf('day');
+            this.startDate = moment().add('days', 1);
+            this.endDate = moment().add('days', 1);
             this.timeZone = moment().zone();
             this.minDate = false;
             this.maxDate = false;
             this.dateLimit = false;
-
             this.showDropdowns = false;
             this.showWeekNumbers = false;
             this.timePicker = false;
@@ -153,14 +152,13 @@ la
 
             this.format = 'MM/DD/YYYY';
             this.separator = ' - ';
-            
-            
-            /************* Custom Language section *********************/
+
+            /*************custom language section*********************/
 
             var language = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
             var my_custom_controls = "";
-            switch (language) {
 
+            switch (language) {
               case 'en':
                 moment.locale('en');
                 this.format = 'MM/DD/YYYY';
@@ -176,7 +174,7 @@ la
               case 'es':
                 moment.locale('es');
                 this.format = 'DD/MM/YYYY';
-                my_custom_controls = {
+                var my_custom_controls = {
                   'applyLabel': 'Aplicar',
                   'cancelLabel': 'Cancelar',
                   'fromLabel': 'Desde',
@@ -188,16 +186,8 @@ la
               default:
                 moment.locale('es');
                 this.format = 'DD/MM/YYYY';
-                my_custom_controls = {
-                  'applyLabel': 'Aplicar',
-                  'cancelLabel': 'Cancelar',
-                  'fromLabel': 'Desde',
-                  'toLabel': 'Hasta',
-                  'weekLabel': 'S',
-                  'customRangeLabel': 'Rango personalizado',
-                };
             }
-
+            
             this.locale = {
               applyLabel: my_custom_controls.applyLabel,
               cancelLabel: my_custom_controls.cancelLabel,
@@ -209,8 +199,8 @@ la
               monthNames: moment.monthsShort(),
               firstDay: moment.localeData()._week.dow
             };
-
-            /******************end**************************************/
+			
+			/******************end**************************************/
 
             this.cb = function () { };
 
@@ -350,11 +340,11 @@ la
             //if no start/end dates set, check if an input element contains initial values
             if (typeof options.startDate === 'undefined' && typeof options.endDate === 'undefined') {
                 if ($(this.element).is('input[type=text]')) {
-                    var val = $(this.element).val(), 
+                    var val = $(this.element).val(),
                         split = val.split(this.separator);
-                    
+
                     start = end = null;
-                    
+
                     if (split.length == 2) {
                         start = moment(split[0], this.format);
                         end = moment(split[1], this.format);
