@@ -124,7 +124,7 @@
     DateRangePicker.prototype = {
 
         constructor: DateRangePicker,
-
+la
         setOptions: function(options, callback) {
 
             this.startDate = moment().startOf('day');
@@ -155,12 +155,12 @@
             this.separator = ' - ';
             
             
-            /*************custom language section*********************/
+            /************* Custom Language section *********************/
 
             var language = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
             var my_custom_controls = "";
-
             switch (language) {
+
               case 'en':
                 moment.locale('en');
                 this.format = 'MM/DD/YYYY';
@@ -176,7 +176,7 @@
               case 'es':
                 moment.locale('es');
                 this.format = 'DD/MM/YYYY';
-                var my_custom_controls = {
+                my_custom_controls = {
                   'applyLabel': 'Aplicar',
                   'cancelLabel': 'Cancelar',
                   'fromLabel': 'Desde',
@@ -188,20 +188,29 @@
               default:
                 moment.locale('es');
                 this.format = 'DD/MM/YYYY';
+                my_custom_controls = {
+                  'applyLabel': 'Aplicar',
+                  'cancelLabel': 'Cancelar',
+                  'fromLabel': 'Desde',
+                  'toLabel': 'Hasta',
+                  'weekLabel': 'S',
+                  'customRangeLabel': 'Rango personalizado',
+                };
             }
-            /******************end**************************************/
 
             this.locale = {
-                applyLabel: 'Apply',
-                cancelLabel: 'Cancel',
-                fromLabel: 'From',
-                toLabel: 'To',
-                weekLabel: 'W',
-                customRangeLabel: 'Custom Range',
-                daysOfWeek: moment.weekdaysMin(),
-                monthNames: moment.monthsShort(),
-                firstDay: moment.localeData()._week.dow
+              applyLabel: my_custom_controls.applyLabel,
+              cancelLabel: my_custom_controls.cancelLabel,
+              fromLabel: my_custom_controls.fromLabel,
+              toLabel: my_custom_controls.toLabel,
+              weekLabel: my_custom_controls.weekLabel,
+              customRangeLabel: my_custom_controls.customRangeLabel,
+              daysOfWeek: moment.weekdaysMin(),
+              monthNames: moment.monthsShort(),
+              firstDay: moment.localeData()._week.dow
             };
+
+            /******************end**************************************/
 
             this.cb = function () { };
 
