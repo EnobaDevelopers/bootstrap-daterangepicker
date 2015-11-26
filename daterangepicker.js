@@ -153,6 +153,43 @@
 
             this.format = 'MM/DD/YYYY';
             this.separator = ' - ';
+            
+            
+            /*************custom language section*********************/
+
+            var language = localStorage.getItem('NG_TRANSLATE_LANG_KEY');
+            var my_custom_controls = "";
+
+            switch (language) {
+              case 'en':
+                moment.locale('en');
+                this.format = 'MM/DD/YYYY';
+                my_custom_controls = {
+                  'applyLabel': 'Apply',
+                  'cancelLabel': 'Cancel',
+                  'fromLabel': 'From',
+                  'toLabel': 'To',
+                  'weekLabel': 'W',
+                  'customRangeLabel': 'Custom Range',
+                };
+                break;
+              case 'es':
+                moment.locale('es');
+                this.format = 'DD/MM/YYYY';
+                var my_custom_controls = {
+                  'applyLabel': 'Aplicar',
+                  'cancelLabel': 'Cancelar',
+                  'fromLabel': 'Desde',
+                  'toLabel': 'Hasta',
+                  'weekLabel': 'S',
+                  'customRangeLabel': 'Rango personalizado',
+                };
+                break;
+              default:
+                moment.locale('es');
+                this.format = 'DD/MM/YYYY';
+            }
+            /******************end**************************************/
 
             this.locale = {
                 applyLabel: 'Apply',
